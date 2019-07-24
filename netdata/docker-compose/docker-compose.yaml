@@ -1,0 +1,39 @@
+version: "2.3"
+services:
+  netdata:
+    hostname: mytesthost
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor=unconfined
+    runtime: nvidia
+    image: netdata-server:1.16
+    ports:
+      - 18999:19999
+    networks:
+      - "defaultnet"
+    links:
+      - localopentsdb
+    depends_on:
+      - localopentsdb
+    restart: unless-stopped
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  localopentsdb:
+    image: petergrace/opentsdb-docker:latest
+    environment:
+      - WAITSECS=30    
+    ports:
+      #- 14242:4242
+      - 10030:60030
+    networks:
+      - "defaultnet"
+    restart: unless-stopped
+
+networks:
+  defaultnet:
