@@ -7,7 +7,7 @@ services:
     security_opt:
       - apparmor=unconfined
     runtime: nvidia
-    image: netdata-server:1.16
+    image: yashiang1986/netdata:1.16
     ports:
       - 18999:19999
     networks:
