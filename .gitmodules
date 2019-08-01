@@ -1,0 +1,3 @@
+[submodule "files/netdata_nv_plugin"]
+	path = files/netdata_nv_plugin
+	url = https://github.com/coraxx/netdata_nv_plugin.git
