@@ -3,7 +3,7 @@ FROM nvidia/cuda:10.0-runtime-ubuntu16.04
 ENV CUDA_DEVICE_ORDER=PCI_BUS_ID
 
 COPY files/kickstart.sh /tmp
-COPY --chown=netdata:netdata files/netdata_nv_plugin /tmp
+COPY files/netdata_nv_plugin /tmp
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y wget vim-tiny && \
